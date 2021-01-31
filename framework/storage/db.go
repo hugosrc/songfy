@@ -3,14 +3,17 @@ package storage
 import (
 	"os"
 
+	"github.com/hugosrc/songfy/application/repository"
 	"github.com/hugosrc/songfy/domain"
+	"github.com/hugosrc/songfy/framework/storage/repositories"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 // Repositories contain all application repositories
 type Repositories struct {
-	db *gorm.DB
+	User repository.UserRepository
+	db   *gorm.DB
 }
 
 // NewRepositories create an repositories
@@ -29,7 +32,8 @@ func NewRepositories(env string) (*Repositories, error) {
 	}
 
 	return &Repositories{
-		db: db,
+		User: repositories.NewUserRepository(db),
+		db:   db,
 	}, nil
 }
 
