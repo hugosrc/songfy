@@ -3,6 +3,7 @@ package storage
 import (
 	"os"
 
+	"github.com/hugosrc/songfy/domain"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -44,5 +45,5 @@ func (repos *Repositories) Close() error {
 
 // AutoMigrate migrates models to the database
 func (repos *Repositories) AutoMigrate() error {
-	return repos.db.AutoMigrate()
+	return repos.db.AutoMigrate(&domain.User{})
 }
